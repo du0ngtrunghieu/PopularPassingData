@@ -49,10 +49,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "\(MyTableViewCell.self)", for: indexPath) as! MyTableViewCell
+        cell.indexPath = indexPath
+        cell.delegate = self
         return cell
     }
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+}
+
+extension ViewController: ActionOnCell {
+    func didTapDark(indexPath: IndexPath?) {
+        self.showDark(indexPath: indexPath)
+    }
+    
+    func didTapLight(indexPath: IndexPath?) {
+        self.showLight(indexPath: indexPath)
     }
 }
 
