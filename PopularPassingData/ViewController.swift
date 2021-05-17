@@ -28,6 +28,16 @@ class ViewController: UIViewController {
         tableView.rowHeight = 60
         tableView.register(UINib(nibName: "\(MyTableViewCell.self)", bundle: nil), forCellReuseIdentifier: "\(MyTableViewCell.self)")
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        NotificationCenter.default.addObserver(self, selector: #selector(didTapDark(noti:)), name: .didTapDark, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didTapLight(noti:)), name: .didTapLight, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 
     func showDark(indexPath: IndexPath?) {
         viewInfo.backgroundColor = .black
@@ -55,6 +65,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return false
     }
 }
+extension Notification.Name {
+    static let didTapDark = NSNotification.Name(rawValue: "didTapDarkNotification")
+    static let didTapLight = NSNotification.Name(rawValue: "didTapLightNotification")
+}
 
-
+extension ViewController {
+    @objc private func didTapDark(noti: Notification){
+        showDark(indexPath: noti.object as? IndexPath)
+    }
+    @objc private func didTapLight(noti: Notification){
+        showLight(indexPath: noti.object as? IndexPath)
+    }
+}
 

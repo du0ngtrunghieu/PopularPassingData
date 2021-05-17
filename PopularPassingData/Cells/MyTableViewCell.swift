@@ -24,10 +24,10 @@ class MyTableViewCell: UITableViewCell {
     }
     
     @IBAction func dark(_ sender: Any) {
-
+        NotificationCenter.default.post(name: .didTapDark, object: indexPath)
     }
 
     @IBAction func light(_ sender: Any) {
-
+        NotificationCenter.default.post(name: .didTapLight, object: indexPath)
     }
 }
