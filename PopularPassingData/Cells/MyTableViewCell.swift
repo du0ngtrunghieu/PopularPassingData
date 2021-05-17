@@ -11,7 +11,6 @@ import UIKit
 class MyTableViewCell: UITableViewCell {
 
     var indexPath: IndexPath?
-    weak var delegate: ActionOnCell?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,19 +24,10 @@ class MyTableViewCell: UITableViewCell {
     }
     
     @IBAction func dark(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.didTapDark(indexPath: indexPath)
-        }
+
     }
 
     @IBAction func light(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.didTapLight(indexPath: indexPath)
-        }
-    }
-}
 
-protocol ActionOnCell: class {
-    func didTapDark(indexPath: IndexPath?)
-    func didTapLight(indexPath: IndexPath?)
+    }
 }
